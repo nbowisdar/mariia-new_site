@@ -16,21 +16,88 @@ interface MyRouterContext {
 	queryClient: QueryClient;
 }
 
+// Simple placeholder NotFound component (customize this!)
+function NotFound() {
+	return (
+		<div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+			<h1 className="text-6xl font-bold text-gray-800 mb-4">404</h1>
+			<p className="text-xl text-gray-600 mb-8">Page not found.</p>
+			<a
+				href="/"
+				className="px-6 py-3 bg-blue-600 text-white rounded hover:bg-blue-700"
+			>
+				Go Home
+			</a>
+		</div>
+	);
+}
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	head: () => ({
 		meta: [
 			{
-				charSet: "utf-8",
+				charSet: "UTF-8",
 			},
 			{
 				name: "viewport",
-				content: "width=device-width, initial-scale=1",
+				content: "width=device-width, initial-scale=1.0",
 			},
 			{
-				title: "TanStack Start Starter",
+				title: "Марія - Психолог | Професійна психологічна допомога",
+			},
+			{
+				name: "description",
+				content:
+					"Професійна психологічна допомога від досвідченого психолога Марії. Індивідуальні та парні консультації онлайн та офлайн.",
+			},
+			{
+				name: "author",
+				content: "Марія - Психолог",
+			},
+			{
+				property: "og:title",
+				content: "Марія - Психолог | Професійна психологічна допомога",
+			},
+			{
+				property: "og:description",
+				content:
+					"Професійна психологічна допомога від досвідченого психолога Марії. Індивідуальні та парні консультації.",
+			},
+			{
+				property: "og:type",
+				content: "website",
+			},
+			{
+				property: "og:image",
+				content: "https://lovable.dev/opengraph-image-p98pqg.png",
+			},
+			{
+				name: "twitter:card",
+				content: "summary_large_image",
+			},
+			{
+				name: "twitter:site",
+				content: "@Lovable",
+			},
+			{
+				name: "twitter:image",
+				content: "https://lovable.dev/opengraph-image-p98pqg.png",
 			},
 		],
 		links: [
+			{
+				rel: "preconnect",
+				href: "https://fonts.googleapis.com",
+			},
+			{
+				rel: "preconnect",
+				href: "https://fonts.gstatic.com",
+				crossOrigin: "anonymous",
+			},
+			{
+				rel: "stylesheet",
+				href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap",
+			},
 			{
 				rel: "stylesheet",
 				href: appCss,
@@ -41,6 +108,9 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
+
+	// Add this: Custom notFoundComponent to handle 404s
+	notFoundComponent: NotFound,
 
 	shellComponent: RootDocument,
 });

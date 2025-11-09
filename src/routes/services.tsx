@@ -1,8 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Clock, CreditCard, Heart, Users, Video } from "lucide-react";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -54,7 +52,7 @@ function RouteComponent() {
 				"Розвиток близькості",
 			],
 		},
-	]
+	];
 
 	return (
 		<div>
@@ -119,11 +117,11 @@ function RouteComponent() {
 											</div>
 										))}
 									</div>
-									<NavLink to="/appointment">
+									<Link to="/appointment">
 										<Button className="rounded-full w-full sm:w-auto">
 											Записатися на {service.title.toLowerCase()}
 										</Button>
-									</NavLink>
+									</Link>
 								</CardContent>
 							</Card>
 						))}
@@ -193,5 +191,5 @@ function RouteComponent() {
 
 			<Footer />
 		</div>
-	)
+	);
 }

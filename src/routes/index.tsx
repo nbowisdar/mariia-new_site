@@ -1,8 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { CheckCircle, Heart, MessageCircle, Users } from "lucide-react";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -53,12 +51,12 @@ function App() {
 								можливості для особистісного зростання.
 							</p>
 							<div className="flex flex-col sm:flex-row gap-4">
-								<NavLink to="/appointment">
+								<Link to="/appointment">
 									<Button size="lg" className="rounded-full w-full sm:w-auto">
 										Записатися на консультацію
 									</Button>
-								</NavLink>
-								<NavLink to="/about">
+								</Link>
+								<Link to="/about">
 									<Button
 										size="lg"
 										variant="outline"
@@ -66,7 +64,7 @@ function App() {
 									>
 										Більше про мене
 									</Button>
-								</NavLink>
+								</Link>
 							</div>
 						</div>
 						<div className="animate-fade-in">
@@ -139,11 +137,11 @@ function App() {
 						))}
 					</div>
 					<div className="text-center mt-12">
-						<NavLink to="/services">
+						<Link to="/services">
 							<Button size="lg" variant="outline" className="rounded-full">
 								Дізнатися більше про послуги
 							</Button>
-						</NavLink>
+						</Link>
 					</div>
 				</div>
 			</section>
@@ -158,11 +156,11 @@ function App() {
 						<p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
 							Запишіться на консультацію зараз і почніть свій шлях до змін
 						</p>
-						<NavLink to="/appointment">
+						<Link to="/appointment">
 							<Button size="lg" className="rounded-full">
 								Записатися на консультацію
 							</Button>
-						</NavLink>
+						</Link>
 					</div>
 				</div>
 			</section>

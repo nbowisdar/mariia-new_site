@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/contact")({
 	component: RouteComponent,
@@ -13,8 +13,6 @@ import {
 	Phone,
 } from "lucide-react";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -61,7 +59,6 @@ function RouteComponent() {
 
 	return (
 		<div className="min-h-screen">
-
 			{/* Hero Section */}
 			<section className="pt-32 pb-12 section-padding bg-linear-to-b from-background to-muted/20">
 				<div className="container-custom">
@@ -157,11 +154,11 @@ function RouteComponent() {
 							Перший крок завжди найважчий. Дозвольте мені підтримати вас на
 							цьому шляху.
 						</p>
-						<NavLink to="/appointment">
+						<Link to="/appointment">
 							<Button size="lg" className="rounded-full">
 								Записатися на консультацію
 							</Button>
-						</NavLink>
+						</Link>
 					</div>
 				</div>
 			</section>

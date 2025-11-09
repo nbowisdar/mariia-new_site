@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NavLink } from "@/components/NavLink";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
@@ -33,12 +32,12 @@ const Header = () => {
 		>
 			<div className="container-custom">
 				<div className="flex items-center justify-between h-20">
-					<NavLink
+					<Link
 						to="/"
 						className="text-2xl font-serif font-semibold text-foreground"
 					>
 						Марія
-					</NavLink>
+					</Link>
 
 					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center gap-8">
@@ -51,11 +50,11 @@ const Header = () => {
 								{item.label}
 							</Link>
 						))}
-						<NavLink to="/appointment">
+						<Link to="/appointment">
 							<Button variant="default" size="sm" className="rounded-full">
 								Записатися
 							</Button>
-						</NavLink>
+						</Link>
 					</nav>
 
 					{/* Mobile Menu Button */}
@@ -73,18 +72,17 @@ const Header = () => {
 					<nav className="md:hidden pb-6 animate-fade-in">
 						<div className="flex flex-col gap-4">
 							{navItems.map((item) => (
-								<NavLink
+								<Link
 									key={item.to}
 									to={item.to}
-									end={item.to === "/"}
 									className="text-base font-medium text-foreground/70 hover:text-foreground transition-colors"
-									activeClassName="text-foreground font-semibold"
+									activeProps={{ className: "text-foreground font-semibold" }}
 									onClick={() => setIsMobileMenuOpen(false)}
 								>
 									{item.label}
-								</NavLink>
+								</Link>
 							))}
-							<NavLink
+							<Link
 								to="/appointment"
 								onClick={() => setIsMobileMenuOpen(false)}
 							>
@@ -95,7 +93,7 @@ const Header = () => {
 								>
 									Записатися
 								</Button>
-							</NavLink>
+							</Link>
 						</div>
 					</nav>
 				)}
