@@ -1,0 +1,341 @@
+import { createFileRoute } from "@tanstack/react-router";
+import {
+	Calendar,
+	Clock,
+	Mail,
+	MessageSquare,
+	Phone,
+	User,
+} from "lucide-react";
+import { useId, useState } from "react";
+import { toast } from "sonner";
+import Footer from "@/components/Footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+
+export const Route = createFileRoute("/appointment")({
+	component: RouteComponent,
+});
+
+function RouteComponent() {
+	const nameId = useId();
+	const emailId = useId();
+	const phoneId = useId();
+	const dateId = useId();
+	const timeId = useId();
+	const messageId = useId();
+
+	const [formData, setFormData] = useState({
+		name: "",
+		email: "",
+		phone: "",
+		serviceType: "",
+		contactMethod: "",
+		preferredDate: "",
+		preferredTime: "",
+		message: "",
+	});
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+
+		// Validation
+		if (
+			!formData.name ||
+			!formData.email ||
+			!formData.phone ||
+			!formData.serviceType
+		) {
+			toast.error("Будь ласка, заповніть всі обов'язкові поля");
+			return;
+		}
+
+		toast.success("Запит відправлено!", {
+			description:
+				"Дякую за ваш запит. Я зв'яжуся з вами найближчим часом для підтвердження запису.",
+		});
+
+		setFormData({
+			name: "",
+			email: "",
+			phone: "",
+			serviceType: "",
+			contactMethod: "",
+			preferredDate: "",
+			preferredTime: "",
+			message: "",
+		});
+	};
+
+	const handleChange = (field: string, value: string) => {
+		setFormData((prev) => ({ ...prev, [field]: value }));
+	};
+
+	return (
+		<div>
+
+			{/* Hero Section */}
+			<section className="pt-32 pb-12 section-padding bg-linear-to-b from-background to-muted/20">
+				<div className="container-custom">
+					<div className="max-w-4xl mx-auto text-center">
+						<h1 className="text-4xl md:text-5xl font-serif font-bold mb-6 animate-fade-in-up">
+							Записатися на консультацію
+						</h1>
+						<p className="text-lg text-muted-foreground animate-fade-in">
+							Заповніть форму нижче, і я зв'яжуся з вами для підтвердження
+							запису
+						</p>
+					</div>
+				</div>
+			</section>
+
+			{/* Form Section */}
+			<section className="section-padding">
+				<div className="container-custom">
+					<div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+						{/* Form */}
+						<div className="lg:col-span-2">
+							<Card className="border-2">
+								<CardHeader>
+									<CardTitle className="text-2xl font-serif">
+										Форма запису
+									</CardTitle>
+								</CardHeader>
+								<CardContent>
+									<form onSubmit={handleSubmit} className="space-y-6">
+										{/* Name */}
+										<div className="space-y-2">
+											<Label htmlFor="name" className="flex items-center gap-2">
+												<User className="w-4 h-4" />
+												Ім'я *
+											</Label>
+											<Input
+												id={nameId}
+												placeholder="Введіть ваше ім'я"
+												value={formData.name}
+												onChange={(e) => handleChange("name", e.target.value)}
+												required
+											/>
+										</div>
+
+										{/* Email */}
+										<div className="space-y-2">
+											<Label
+												htmlFor="email"
+												className="flex items-center gap-2"
+											>
+												<Mail className="w-4 h-4" />
+												Email *
+											</Label>
+											<Input
+												id={emailId}
+												type="email"
+												placeholder="example@email.com"
+												value={formData.email}
+												onChange={(e) => handleChange("email", e.target.value)}
+												required
+											/>
+										</div>
+
+										{/* Phone */}
+										<div className="space-y-2">
+											<Label
+												htmlFor="phone"
+												className="flex items-center gap-2"
+											>
+												<Phone className="w-4 h-4" />
+												Телефон *
+											</Label>
+											<Input
+												id={phoneId}
+												type="tel"
+												placeholder="+380 12 345 67 89"
+												value={formData.phone}
+												onChange={(e) => handleChange("phone", e.target.value)}
+												required
+											/>
+										</div>
+
+										{/* Service Type */}
+										<div className="space-y-2">
+											<Label htmlFor="serviceType">Тип консультації *</Label>
+											<Select
+												value={formData.serviceType}
+												onValueChange={(value: string) =>
+													handleChange("serviceType", value)
+												}
+											>
+												<SelectTrigger>
+													<SelectValue placeholder="Оберіть тип консультації" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="individual">
+														Індивідуальна консультація
+													</SelectItem>
+													<SelectItem value="online">
+														Онлайн консультація
+													</SelectItem>
+													<SelectItem value="couple">Парна терапія</SelectItem>
+												</SelectContent>
+											</Select>
+										</div>
+
+										{/* Contact Method */}
+										<div className="space-y-2">
+											<Label htmlFor="contactMethod">
+												Зручний спосіб зв'язку
+											</Label>
+											<Select
+												value={formData.contactMethod}
+												onValueChange={(value: string) =>
+													handleChange("contactMethod", value)
+												}
+											>
+												<SelectTrigger>
+													<SelectValue placeholder="Оберіть спосіб зв'язку" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="phone">Телефон</SelectItem>
+													<SelectItem value="email">Email</SelectItem>
+													<SelectItem value="telegram">Telegram</SelectItem>
+													<SelectItem value="viber">Viber</SelectItem>
+												</SelectContent>
+											</Select>
+										</div>
+
+										{/* Date and Time */}
+										<div className="grid md:grid-cols-2 gap-4">
+											<div className="space-y-2">
+												<Label
+													htmlFor="preferredDate"
+													className="flex items-center gap-2"
+												>
+													<Calendar className="w-4 h-4" />
+													Бажана дата
+												</Label>
+												<Input
+													id={dateId}
+													type="date"
+													value={formData.preferredDate}
+													onChange={(e) =>
+														handleChange("preferredDate", e.target.value)
+													}
+												/>
+											</div>
+											<div className="space-y-2">
+												<Label
+													htmlFor="preferredTime"
+													className="flex items-center gap-2"
+												>
+													<Clock className="w-4 h-4" />
+													Бажаний час
+												</Label>
+												<Input
+													id={timeId}
+													type="time"
+													value={formData.preferredTime}
+													onChange={(e) =>
+														handleChange("preferredTime", e.target.value)
+													}
+												/>
+											</div>
+										</div>
+
+										{/* Message */}
+										<div className="space-y-2">
+											<Label
+												htmlFor="message"
+												className="flex items-center gap-2"
+											>
+												<MessageSquare className="w-4 h-4" />
+												Додаткова інформація
+											</Label>
+											<Textarea
+												id={messageId}
+												placeholder="Розкажіть коротко про ваш запит (необов'язково)"
+												rows={4}
+												value={formData.message}
+												onChange={(e) =>
+													handleChange("message", e.target.value)
+												}
+											/>
+										</div>
+
+										<Button
+											type="submit"
+											size="lg"
+											className="w-full rounded-full"
+										>
+											Відправити запит
+										</Button>
+									</form>
+								</CardContent>
+							</Card>
+						</div>
+
+						{/* Info Sidebar */}
+						<div className="space-y-6">
+							<Card className="border-2">
+								<CardHeader>
+									<CardTitle className="text-xl font-serif">
+										Важлива інформація
+									</CardTitle>
+								</CardHeader>
+								<CardContent className="space-y-4 text-sm text-muted-foreground">
+									<p>
+										📅 <strong className="text-foreground">Графік:</strong>{" "}
+										Пн-Пт, 10:00-20:00. Суботи за домовленістю.
+									</p>
+									<p>
+										⏱️ <strong className="text-foreground">Тривалість:</strong>{" "}
+										Стандартна сесія – 60 хвилин, парна терапія – 90 хвилин.
+									</p>
+									<p>
+										💳 <strong className="text-foreground">Оплата:</strong>{" "}
+										Після сесії готівкою, карткою або переказом.
+									</p>
+									<p>
+										🔒{" "}
+										<strong className="text-foreground">
+											Конфіденційність:
+										</strong>{" "}
+										Гарантована повна конфіденційність відповідно до етичного
+										кодексу.
+									</p>
+								</CardContent>
+							</Card>
+
+							<Card className="border-2 bg-linear-to-br from-primary/5 to-secondary/5">
+								<CardContent className="p-6">
+									<h3 className="font-serif font-semibold mb-3">
+										Маєте питання?
+									</h3>
+									<p className="text-sm text-muted-foreground mb-4">
+										Якщо у вас виникли питання щодо запису або послуг,
+										зв'яжіться зі мною зручним способом.
+									</p>
+									<div className="space-y-2 text-sm">
+										<p>📧 maria@example.com</p>
+										<p>📱 +380 12 345 67 89</p>
+									</div>
+								</CardContent>
+							</Card>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<Footer />
+		</div>
+	);
+}
