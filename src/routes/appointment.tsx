@@ -1,12 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import {
-	Calendar,
-	Clock,
-	Mail,
-	MessageSquare,
-	Phone,
-	User,
-} from "lucide-react";
+import { Calendar, Mail, MessageSquare, Phone, User } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { toast } from "sonner";
 import Footer from "@/components/Footer";

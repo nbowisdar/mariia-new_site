@@ -55,6 +55,11 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "Марія - Психолог",
 			},
 			{
+				property: "og:image",
+				content:
+					"https://scontent-iev1-1.cdninstagram.com/v/t51.29350-15/371748469_677811687208577_4656536669844714365_n.webp?stp=dst-jpg_e35_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQuaW1hZ2VfdXJsZ2VuLjE0NDB4MTYzMS5zZHIuZjI5MzUwLmRlZmF1bHRfaW1hZ2UuYzIifQ&_nc_ht=scontent-iev1-1.cdninstagram.com&_nc_cat=105&_nc_oc=Q6cZ2QEdWWiYHjJXo4-nvr_UDDAKeMDKBDIoxdPrl811SFvQviSAUkMYXk3ko54B6s5QQuo&_nc_ohc=8XWIjWhl6h0Q7kNvwFcEs9F&_nc_gid=NVh9vBgJaPw1OZBF6y_7aw&edm=AP4sbd4BAAAA&ccb=7-5&ig_cache_key=MzE3OTQ5MDM2NDE4ODIxNzY4MQ%3D%3D.3-ccb7-5&oh=00_Afgi6HW2H1Qtz3RsG1IJ1EvjXZKCyn-cI4OyjZZNs1QejA&oe=691EC35B&_nc_sid=7a9f4b",
+			},
+			{
 				property: "og:title",
 				content: "Марія - Психолог | Професійна психологічна допомога",
 			},
@@ -112,19 +117,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<Header />
 				{children}
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-						TanStackQueryDevtools,
-					]}
-				/>
-
 				<Toaster />
 				<Scripts />
 			</body>

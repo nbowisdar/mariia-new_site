@@ -24,11 +24,7 @@ const Header = () => {
 
 	return (
 		<header
-			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-				isScrolled
-					? "bg-background/95 backdrop-blur-sm shadow-sm"
-					: "bg-transparent"
-			}`}
+			className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-sm shadow-sm`}
 		>
 			<div className="container-custom">
 				<div className="flex items-center justify-between h-20">
@@ -69,7 +65,7 @@ const Header = () => {
 
 				{/* Mobile Navigation */}
 				{isMobileMenuOpen && (
-					<nav className="md:hidden pb-6 animate-fade-in">
+					<nav className="md:hidden pb-6 animate-fade-in z-100">
 						<div className="flex flex-col gap-4">
 							{navItems.map((item) => (
 								<Link
