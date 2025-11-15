@@ -33,13 +33,13 @@ function RouteComponent() {
 		{
 			icon: <MessageCircle className="w-6 h-6" />,
 			title: "Telegram",
-			value: "@maria_psychologist",
+			value: "@Cactyss",
 			link: "#",
 		},
 		{
 			icon: <MapPin className="w-6 h-6" />,
 			title: "Адреса",
-			value: "м. Київ, вул. Прикладна, 15",
+			value: "м. Дніпро, вул. Калинова 4",
 			link: "#",
 		},
 	];
