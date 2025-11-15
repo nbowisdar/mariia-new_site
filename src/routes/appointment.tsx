@@ -33,7 +33,6 @@ function RouteComponent() {
 	const emailId = useId();
 	const phoneId = useId();
 	const dateId = useId();
-	const timeId = useId();
 	const messageId = useId();
 
 	const [formData, setFormData] = useState({
@@ -43,7 +42,6 @@ function RouteComponent() {
 		serviceType: "",
 		contactMethod: "",
 		preferredDate: "",
-		preferredTime: "",
 		message: "",
 	});
 
@@ -85,7 +83,6 @@ function RouteComponent() {
 			serviceType: "",
 			contactMethod: "",
 			preferredDate: "",
-			preferredTime: "",
 			message: "",
 		});
 
@@ -261,7 +258,7 @@ function RouteComponent() {
 											</div>
 
 											{/* Date and Time */}
-											<div className="grid md:grid-cols-2 gap-4">
+											<div className="space-y-2">
 												<div className="space-y-2">
 													<Label
 														htmlFor="preferredDate"
@@ -276,23 +273,6 @@ function RouteComponent() {
 														value={formData.preferredDate}
 														onChange={(e) =>
 															handleChange("preferredDate", e.target.value)
-														}
-													/>
-												</div>
-												<div className="space-y-2">
-													<Label
-														htmlFor="preferredTime"
-														className="flex items-center gap-2"
-													>
-														<Clock className="w-4 h-4" />
-														Бажаний час
-													</Label>
-													<Input
-														id={timeId}
-														type="time"
-														value={formData.preferredTime}
-														onChange={(e) =>
-															handleChange("preferredTime", e.target.value)
 														}
 													/>
 												</div>

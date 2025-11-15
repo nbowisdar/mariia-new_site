@@ -11,7 +11,6 @@ type FormData = {
 	serviceType: string;
 	contactMethod: string;
 	preferredDate: string;
-	preferredTime: string;
 	message: string;
 };
 
@@ -32,14 +31,13 @@ function formatFormDataMessage(data: FormData): string {
 	return `
 Ура, новий запит! 🥳🥳
 
-Name: ${data.name}
+Ім'я: ${data.name}
 Email: ${data.email}
-Phone: ${data.phone}
-Service Type: ${data.serviceType}
-Contact Method: ${data.contactMethod}
-Preferred Date: ${data.preferredDate}
-Preferred Time: ${data.preferredTime}
-Message: ${data.message}
+Телефон: ${data.phone}
+Тип послуги: ${data.serviceType}
+Спосіб зв'язку: ${data.contactMethod}
+Бажана дата: ${data.preferredDate}
+Повідомлення: ${data.message}
 `.trim();
 }
 
