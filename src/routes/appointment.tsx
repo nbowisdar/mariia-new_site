@@ -22,6 +22,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { handleFormSubmit } from "@/lib/functions";
 
 export const Route = createFileRoute("/appointment")({
 	component: RouteComponent,
@@ -49,13 +50,13 @@ function RouteComponent() {
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
-		// Validation
 		if (
 			!formData.name ||
 			!formData.email ||
 			!formData.phone ||
 			!formData.serviceType
 		) {
+			// Validation
 			toast.error("Будь ласка, заповніть всі обов'язкові поля");
 			return;
 		}
@@ -65,16 +66,19 @@ function RouteComponent() {
 				"Дякую за ваш запит. Я зв'яжуся з вами найближчим часом для підтвердження запису.",
 		});
 
-		setFormData({
-			name: "",
-			email: "",
-			phone: "",
-			serviceType: "",
-			contactMethod: "",
-			preferredDate: "",
-			preferredTime: "",
-			message: "",
-		});
+		console.log("Bar");
+
+		// setFormData({
+		// 	name: "",
+		// 	email: "",
+		// 	phone: "",
+		// 	serviceType: "",
+		// 	contactMethod: "",
+		// 	preferredDate: "",
+		// 	preferredTime: "",
+		// 	message: "",
+		// });
+		handleFormSubmit({ data: formData });
 	};
 
 	const handleChange = (field: string, value: string) => {
@@ -83,7 +87,6 @@ function RouteComponent() {
 
 	return (
 		<div>
-
 			{/* Hero Section */}
 			<section className="pt-32 pb-12 section-padding bg-linear-to-b from-background to-muted/20">
 				<div className="container-custom">

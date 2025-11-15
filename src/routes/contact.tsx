@@ -48,7 +48,7 @@ function RouteComponent() {
 		{
 			icon: <Instagram size={24} />,
 			name: "Instagram",
-			link: "#",
+			link: "https://www.instagram.com/_mari_089s",
 		},
 		{
 			icon: <Facebook size={24} />,

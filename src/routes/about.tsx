@@ -46,14 +46,11 @@ function RouteComponent() {
 				<div className="container-custom">
 					<div className="grid md:grid-cols-2 gap-12 items-start mb-16">
 						<div className="animate-fade-in">
-							<div className="aspect-3/4 rounded-2xl bg-linear-to-br from-primary/20 to-secondary/20 shadow-lg flex items-center justify-center">
-								<div className="text-center p-8">
-									<div className="w-64 h-64 mx-auto rounded-full bg-linear-to-br from-primary/30 to-secondary/30 flex items-center justify-center">
-										<span className="text-8xl">👩‍⚕️</span>
-									</div>
-									<p className="mt-4 text-sm text-muted-foreground">Марія</p>
-								</div>
-							</div>
+							<img
+								className="rounded-3xl bg-linear-to-br from-primary/20 to-secondary/20 shadow-lg flex items-center justify-center"
+								src="mari2.jpg"
+								alt="mari"
+							></img>
 						</div>
 						<div className="animate-fade-in-up">
 							<h2 className="text-3xl font-serif font-bold mb-6">

@@ -68,16 +68,11 @@ function App() {
 							</div>
 						</div>
 						<div className="animate-fade-in">
-							<div className="aspect-square rounded-3xl bg-linear-to-br from-primary/20 to-secondary/20 shadow-lg flex items-center justify-center">
-								<div className="text-center p-8">
-									<div className="w-48 h-48 mx-auto rounded-full bg-linear-to-br from-primary/30 to-secondary/30 flex items-center justify-center">
-										<span className="text-6xl">👩‍⚕️</span>
-									</div>
-									<p className="mt-4 text-sm text-muted-foreground">
-										Фото психолога Марії
-									</p>
-								</div>
-							</div>
+							<img
+								className="rounded-3xl bg-linear-to-br from-primary/20 to-secondary/20 shadow-lg flex items-center justify-center"
+								src="mari.jpg"
+								alt="mari"
+							></img>
 						</div>
 					</div>
 				</div>
