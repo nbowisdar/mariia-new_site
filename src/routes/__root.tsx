@@ -68,20 +68,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 				content: "website",
 			},
 			{
-				property: "og:image",
-				content: "https://lovable.dev/opengraph-image-p98pqg.png",
-			},
-			{
 				name: "twitter:card",
 				content: "summary_large_image",
-			},
-			{
-				name: "twitter:site",
-				content: "@Lovable",
-			},
-			{
-				name: "twitter:image",
-				content: "https://lovable.dev/opengraph-image-p98pqg.png",
 			},
 		],
 		links: [
