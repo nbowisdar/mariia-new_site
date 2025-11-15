@@ -57,18 +57,18 @@ const Footer = () => {
 						<h4 className="font-semibold mb-4">Контакти</h4>
 						<div className="flex flex-col gap-3">
 							<a
-								href="mailto:maria@example.com"
+								href="mailto:mariasohanchak@gmail.com"
 								className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
 							>
 								<Mail size={16} />
-								maria@example.com
+								mariasohanchak@gmail.com
 							</a>
 							<a
 								href="tel:+380123456789"
 								className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
 							>
 								<Phone size={16} />
-								+380 12 345 67 89
+								+380 97 761 57 02
 							</a>
 							<div className="flex gap-3 mt-2">
 								<a

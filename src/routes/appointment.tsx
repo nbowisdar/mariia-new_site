@@ -162,7 +162,7 @@ function RouteComponent() {
 											<Input
 												id={phoneId}
 												type="tel"
-												placeholder="+380 12 345 67 89"
+												placeholder="+380 97 761 57 02"
 												value={formData.phone}
 												onChange={(e) => handleChange("phone", e.target.value)}
 												required
@@ -328,8 +328,8 @@ function RouteComponent() {
 										зв'яжіться зі мною зручним способом.
 									</p>
 									<div className="space-y-2 text-sm">
-										<p>📧 maria@example.com</p>
-										<p>📱 +380 12 345 67 89</p>
+										<p>📧 mariasohanchak@gmail.com</p>
+										<p>📱 +380 97 761 57 02</p>
 									</div>
 								</CardContent>
 							</Card>

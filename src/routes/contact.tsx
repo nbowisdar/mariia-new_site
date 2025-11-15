@@ -21,13 +21,13 @@ function RouteComponent() {
 		{
 			icon: <Mail className="w-6 h-6" />,
 			title: "Email",
-			value: "maria@example.com",
-			link: "mailto:maria@example.com",
+			value: "mariasohanchak@gmail.com",
+			link: "mailto:mariasohanchak@gmail.com",
 		},
 		{
 			icon: <Phone className="w-6 h-6" />,
 			title: "Телефон",
-			value: "+380 12 345 67 89",
+			value: "+380 97 761 57 02",
 			link: "tel:+380123456789",
 		},
 		{
