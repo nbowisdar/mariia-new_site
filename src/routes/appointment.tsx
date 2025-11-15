@@ -7,7 +7,7 @@ import {
 	Phone,
 	User,
 } from "lucide-react";
-import { useId, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { toast } from "sonner";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -47,6 +47,16 @@ function RouteComponent() {
 		message: "",
 	});
 
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
+	// Check localStorage on component mount
+	useEffect(() => {
+		const savedState = localStorage.getItem("appointmentFormSubmitted");
+		if (savedState === "true") {
+			setIsSubmitted(true);
+		}
+	}, []);
+
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
 
@@ -68,21 +78,32 @@ function RouteComponent() {
 
 		console.log("Bar");
 
-		// setFormData({
-		// 	name: "",
-		// 	email: "",
-		// 	phone: "",
-		// 	serviceType: "",
-		// 	contactMethod: "",
-		// 	preferredDate: "",
-		// 	preferredTime: "",
-		// 	message: "",
-		// });
+		setFormData({
+			name: "",
+			email: "",
+			phone: "",
+			serviceType: "",
+			contactMethod: "",
+			preferredDate: "",
+			preferredTime: "",
+			message: "",
+		});
+
+		// Set submitted state and save to localStorage
+		setIsSubmitted(true);
+		localStorage.setItem("appointmentFormSubmitted", "true");
+
 		handleFormSubmit({ data: formData });
 	};
 
 	const handleChange = (field: string, value: string) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
+	};
+
+	// Function to reset the form (in case user wants to submit another appointment)
+	const resetForm = () => {
+		setIsSubmitted(false);
+		localStorage.removeItem("appointmentFormSubmitted");
 	};
 
 	return (
@@ -95,8 +116,9 @@ function RouteComponent() {
 							Записатися на консультацію
 						</h1>
 						<p className="text-lg text-muted-foreground animate-fade-in">
-							Заповніть форму нижче, і я зв'яжуся з вами для підтвердження
-							запису
+							{isSubmitted
+								? "Дякуємо за ваш запит!"
+								: "Заповніть форму нижче, і я зв'яжуся з вами для підтвердження запису"}
 						</p>
 					</div>
 				</div>
@@ -106,182 +128,205 @@ function RouteComponent() {
 			<section className="section-padding">
 				<div className="container-custom">
 					<div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-						{/* Form */}
+						{/* Form or Success Message */}
 						<div className="lg:col-span-2">
 							<Card className="border-2">
 								<CardHeader>
 									<CardTitle className="text-2xl font-serif">
-										Форма запису
+										{isSubmitted ? "Запит успішно відправлено" : "Форма запису"}
 									</CardTitle>
 								</CardHeader>
 								<CardContent>
-									<form onSubmit={handleSubmit} className="space-y-6">
-										{/* Name */}
-										<div className="space-y-2">
-											<Label htmlFor="name" className="flex items-center gap-2">
-												<User className="w-4 h-4" />
-												Ім'я *
-											</Label>
-											<Input
-												id={nameId}
-												placeholder="Введіть ваше ім'я"
-												value={formData.name}
-												onChange={(e) => handleChange("name", e.target.value)}
-												required
-											/>
+									{isSubmitted ? (
+										<div className="space-y-6 text-center py-8">
+											<div className="text-6xl mb-4">✅</div>
+											<h3 className="text-xl font-semibold text-foreground">
+												Дякуємо за ваш запит!
+											</h3>
+											<p className="text-muted-foreground">
+												Я зв'яжуся з вами найближчим часом для підтвердження
+												запису. Якщо у вас є термінові питання, ви можете
+												зв'язатися зі мною безпосередньо за телефоном або email.
+											</p>
 										</div>
-
-										{/* Email */}
-										<div className="space-y-2">
-											<Label
-												htmlFor="email"
-												className="flex items-center gap-2"
-											>
-												<Mail className="w-4 h-4" />
-												Email *
-											</Label>
-											<Input
-												id={emailId}
-												type="email"
-												placeholder="example@email.com"
-												value={formData.email}
-												onChange={(e) => handleChange("email", e.target.value)}
-												required
-											/>
-										</div>
-
-										{/* Phone */}
-										<div className="space-y-2">
-											<Label
-												htmlFor="phone"
-												className="flex items-center gap-2"
-											>
-												<Phone className="w-4 h-4" />
-												Телефон *
-											</Label>
-											<Input
-												id={phoneId}
-												type="tel"
-												placeholder="+380 97 761 57 02"
-												value={formData.phone}
-												onChange={(e) => handleChange("phone", e.target.value)}
-												required
-											/>
-										</div>
-
-										{/* Service Type */}
-										<div className="space-y-2">
-											<Label htmlFor="serviceType">Тип консультації *</Label>
-											<Select
-												value={formData.serviceType}
-												onValueChange={(value: string) =>
-													handleChange("serviceType", value)
-												}
-											>
-												<SelectTrigger>
-													<SelectValue placeholder="Оберіть тип консультації" />
-												</SelectTrigger>
-												<SelectContent>
-													<SelectItem value="individual">
-														Індивідуальна консультація
-													</SelectItem>
-													<SelectItem value="online">
-														Онлайн консультація
-													</SelectItem>
-													<SelectItem value="couple">Парна терапія</SelectItem>
-												</SelectContent>
-											</Select>
-										</div>
-
-										{/* Contact Method */}
-										<div className="space-y-2">
-											<Label htmlFor="contactMethod">
-												Зручний спосіб зв'язку
-											</Label>
-											<Select
-												value={formData.contactMethod}
-												onValueChange={(value: string) =>
-													handleChange("contactMethod", value)
-												}
-											>
-												<SelectTrigger>
-													<SelectValue placeholder="Оберіть спосіб зв'язку" />
-												</SelectTrigger>
-												<SelectContent>
-													<SelectItem value="phone">Телефон</SelectItem>
-													<SelectItem value="email">Email</SelectItem>
-													<SelectItem value="telegram">Telegram</SelectItem>
-													<SelectItem value="viber">Viber</SelectItem>
-												</SelectContent>
-											</Select>
-										</div>
-
-										{/* Date and Time */}
-										<div className="grid md:grid-cols-2 gap-4">
+									) : (
+										<form onSubmit={handleSubmit} className="space-y-6">
+											{/* Name */}
 											<div className="space-y-2">
 												<Label
-													htmlFor="preferredDate"
+													htmlFor="name"
 													className="flex items-center gap-2"
 												>
-													<Calendar className="w-4 h-4" />
-													Бажана дата
+													<User className="w-4 h-4" />
+													Ім'я *
 												</Label>
 												<Input
-													id={dateId}
-													type="date"
-													value={formData.preferredDate}
+													id={nameId}
+													placeholder="Введіть ваше ім'я"
+													value={formData.name}
+													onChange={(e) => handleChange("name", e.target.value)}
+													required
+												/>
+											</div>
+
+											{/* Email */}
+											<div className="space-y-2">
+												<Label
+													htmlFor="email"
+													className="flex items-center gap-2"
+												>
+													<Mail className="w-4 h-4" />
+													Email *
+												</Label>
+												<Input
+													id={emailId}
+													type="email"
+													placeholder="example@email.com"
+													value={formData.email}
 													onChange={(e) =>
-														handleChange("preferredDate", e.target.value)
+														handleChange("email", e.target.value)
+													}
+													required
+												/>
+											</div>
+
+											{/* Phone */}
+											<div className="space-y-2">
+												<Label
+													htmlFor="phone"
+													className="flex items-center gap-2"
+												>
+													<Phone className="w-4 h-4" />
+													Телефон *
+												</Label>
+												<Input
+													id={phoneId}
+													type="tel"
+													placeholder="+380 97 761 57 02"
+													value={formData.phone}
+													onChange={(e) =>
+														handleChange("phone", e.target.value)
+													}
+													required
+												/>
+											</div>
+
+											{/* Service Type */}
+											<div className="space-y-2">
+												<Label htmlFor="serviceType">Тип консультації *</Label>
+												<Select
+													value={formData.serviceType}
+													onValueChange={(value: string) =>
+														handleChange("serviceType", value)
+													}
+												>
+													<SelectTrigger>
+														<SelectValue placeholder="Оберіть тип консультації" />
+													</SelectTrigger>
+													<SelectContent>
+														<SelectItem value="individual">
+															Індивідуальна консультація
+														</SelectItem>
+														<SelectItem value="online">
+															Онлайн консультація
+														</SelectItem>
+														<SelectItem value="couple">
+															Парна терапія
+														</SelectItem>
+													</SelectContent>
+												</Select>
+											</div>
+
+											{/* Contact Method */}
+											<div className="space-y-2">
+												<Label htmlFor="contactMethod">
+													Зручний спосіб зв'язку
+												</Label>
+												<Select
+													value={formData.contactMethod}
+													onValueChange={(value: string) =>
+														handleChange("contactMethod", value)
+													}
+												>
+													<SelectTrigger>
+														<SelectValue placeholder="Оберіть спосіб зв'язку" />
+													</SelectTrigger>
+													<SelectContent>
+														<SelectItem value="phone">Телефон</SelectItem>
+														<SelectItem value="email">Email</SelectItem>
+														<SelectItem value="telegram">Telegram</SelectItem>
+														<SelectItem value="viber">Viber</SelectItem>
+													</SelectContent>
+												</Select>
+											</div>
+
+											{/* Date and Time */}
+											<div className="grid md:grid-cols-2 gap-4">
+												<div className="space-y-2">
+													<Label
+														htmlFor="preferredDate"
+														className="flex items-center gap-2"
+													>
+														<Calendar className="w-4 h-4" />
+														Бажана дата
+													</Label>
+													<Input
+														id={dateId}
+														type="date"
+														value={formData.preferredDate}
+														onChange={(e) =>
+															handleChange("preferredDate", e.target.value)
+														}
+													/>
+												</div>
+												<div className="space-y-2">
+													<Label
+														htmlFor="preferredTime"
+														className="flex items-center gap-2"
+													>
+														<Clock className="w-4 h-4" />
+														Бажаний час
+													</Label>
+													<Input
+														id={timeId}
+														type="time"
+														value={formData.preferredTime}
+														onChange={(e) =>
+															handleChange("preferredTime", e.target.value)
+														}
+													/>
+												</div>
+											</div>
+
+											{/* Message */}
+											<div className="space-y-2">
+												<Label
+													htmlFor="message"
+													className="flex items-center gap-2"
+												>
+													<MessageSquare className="w-4 h-4" />
+													Додаткова інформація
+												</Label>
+												<Textarea
+													id={messageId}
+													placeholder="Розкажіть коротко про ваш запит (необов'язково)"
+													rows={4}
+													value={formData.message}
+													onChange={(e) =>
+														handleChange("message", e.target.value)
 													}
 												/>
 											</div>
-											<div className="space-y-2">
-												<Label
-													htmlFor="preferredTime"
-													className="flex items-center gap-2"
-												>
-													<Clock className="w-4 h-4" />
-													Бажаний час
-												</Label>
-												<Input
-													id={timeId}
-													type="time"
-													value={formData.preferredTime}
-													onChange={(e) =>
-														handleChange("preferredTime", e.target.value)
-													}
-												/>
-											</div>
-										</div>
 
-										{/* Message */}
-										<div className="space-y-2">
-											<Label
-												htmlFor="message"
-												className="flex items-center gap-2"
+											<Button
+												type="submit"
+												size="lg"
+												className="w-full rounded-full"
 											>
-												<MessageSquare className="w-4 h-4" />
-												Додаткова інформація
-											</Label>
-											<Textarea
-												id={messageId}
-												placeholder="Розкажіть коротко про ваш запит (необов'язково)"
-												rows={4}
-												value={formData.message}
-												onChange={(e) =>
-													handleChange("message", e.target.value)
-												}
-											/>
-										</div>
-
-										<Button
-											type="submit"
-											size="lg"
-											className="w-full rounded-full"
-										>
-											Відправити запит
-										</Button>
-									</form>
+												Відправити запит
+											</Button>
+										</form>
+									)}
 								</CardContent>
 							</Card>
 						</div>

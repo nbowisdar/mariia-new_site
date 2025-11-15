@@ -30,7 +30,7 @@ async function sendMessageTelegram(text: string) {
 // New function to format FormData into a single message
 function formatFormDataMessage(data: FormData): string {
 	return `
-New Form Submission:
+Ура, новий запит! 🥳🥳
 
 Name: ${data.name}
 Email: ${data.email}
